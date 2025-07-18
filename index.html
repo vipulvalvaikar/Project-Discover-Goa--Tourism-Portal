@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Goa - Tourism Portal</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2e86de;
+            --secondary: #10ac84;
+            --accent: #ff9f43;
+            --light: #f5f6fa;
+            --dark: #222f3e;
+            --text: #576574;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.ofaexp.com/wp-content/uploads/2021/04/GOA.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        nav.active {
+            display: block;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translate(-50%, 0);
+            }
+            40% {
+                transform: translate(-50%, -20px);
+            }
+            60% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        /* Attractions Section */
+        .attractions {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .attraction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .attraction-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .attraction-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .attraction-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .attraction-card:hover .attraction-img img {
+            transform: scale(1.1);
+        }
+
+        .attraction-info {
+            padding: 20px;
+        }
+
+        .attraction-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .attraction-info p {
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .read-more::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .read-more:hover::after {
+            width: 100%;
+        }
+
+        /* Travel Guides Section */
+        .travel-guides {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .guide-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            margin: 0 5px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .guide-item {
+            flex: 0 0 calc(33.333% - 20px);
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .guide-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .guide-text {
+            padding: 20px;
+        }
+
+        .guide-text h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .guide-text p {
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        /* Statistics Section */
+        .statistics {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .stat-card {
+            flex: 1 1 200px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+        }
+
+        .chart-container {
+            margin-top: 50px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-placeholder {
+            height: 400px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Itinerary Planner Section */
+        .itinerary {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .itinerary-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input {
+            margin-right: 8px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .testimonial-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid var(--accent);
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .author-title {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .attraction-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .tab-content.active {
+                flex-direction: column;
+            }
+            
+            .guide-item {
+                flex: 0 0 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .itinerary-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+            
+            .section-title {
+                margin-bottom: 30px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .attraction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section with Hero Image -->
+    <header id="home">
+        <div class="logo">GoaExplorer</div>
+        <nav id="navbar">
+            <div class="nav-container">
+                <div class="logo">GoaExplorer</div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#attractions">Attractions</a></li>
+                    <li><a href="#travel-guides">Travel Guides</a></li>
+                    <li><a href="#statistics">Statistics</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#itinerary">Plan Your Trip</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Discover the Magic of Goa</h1>
+            <p>Explore pristine beaches, vibrant culture, and unforgettable experiences in India's coastal paradise.</p>
+            <a href="#attractions" class="btn">Explore Now</a>
+        </div>
+        <a href="#attractions" class="scroll-down">
+            <svg width="30" height="50" viewBox="0 0 30 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="12.5" y="10" width="5" height="20" rx="2.5" fill="white"/>
+                <!-- <rect x="12.5" y="30" width="5" height="5" rx="2.5" transform="rotate(90 12.5 30)" fill="white"/> -->
+                <path d="M15 40L20 35L10 35L15 40Z" fill="white"/>
+            </svg>
+        </a>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Attractions Section -->
+        <section class="attractions" id="attractions">
+            <div class="container">
+                <h2 class="section-title">Top Attractions in Goa</h2>
+                <div class="attraction-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://plus.unsplash.com/premium_photo-1697729701846-e34563b06d47?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z29hfGVufDB8fDB8fHww" alt="Panoramic view of Calangute Beach with golden sand, palm trees, and clear blue waters under sunny skies">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Calangute Beach</h3>
+                            <p>Known as the "Queen of Beaches," Calangute is the largest beach in North Goa stretching 7 kilometers long with golden sands and water sports.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://goa.tours/wp-content/uploads/2022/02/india-travels-gda952ceac_1920.jpg" alt="Historic Chapora Fort ruins with red laterite walls overlooking the Arabian Sea and Vagator Beach">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Chapora Fort</h3>
+                            <p>Made famous by the Bollywood movie 'Dil Chahta Hai,' this 17th-century Portuguese fort offers breathtaking sunset views.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Basilica_of_Bom_Jesus_6_%28Old_Goa%29.jpg" alt="Majestic Basilica of Bom Jesus with white facade, Baroque architecture, and lush green surroundings">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Basilica of Bom Jesus</h3>
+                            <p>A UNESCO World Heritage Site housing the mortal remains of St. Francis Xavier, this is one of India's most revered churches.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://i.redd.it/qh0oz6ru5g981.jpg" alt="Dudhsagar Waterfalls cascading down rocky cliffs with mist rising in the lush green Western Ghats">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Dudhsagar Falls</h3>
+                            <p>Meaning "Sea of Milk," this four-tiered waterfall on the Mandovi River is one of India's tallest and most spectacular waterfalls.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://www.golokaso.com/wp-content/uploads/2018/10/fontainhas-4.jpg" alt="Colorful Pinacoteca art gallery in Panjim with Portuguese-style buildings and cobbled streets">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Fontainhas</h3>
+                            <p>The Latin Quarter of Panjim with colorful Portuguese-style houses, art galleries, and the famous Confeitaria 31 de Janeiro bakery.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="attraction-card">
+                        <div class="attraction-img">
+                            <img src="https://s7ap1.scene7.com/is/image/incredibleindia/dr-salim-ali-bird-sanctuary-goa-goa-1-attr-hero?qlt=82&ts=1742160241518" alt="Pelicans and flamingos wading in the shallow waters of Dr. Salim Ali Bird Sanctuary">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>Salim Ali Bird Sanctuary</h3>
+                            <p>Situated on the island of Chorao along the Mandovi River, this mangrove ecosystem is home to diverse bird species including kingfishers and eagles.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Guides Section -->
+        <section class="travel-guides" id="travel-guides">
+            <div class="container">
+                <h2 class="section-title">Goa Travel Guides</h2>
+                <div class="guide-tabs">
+                    <button class="tab-btn active" data-tab="food">Food & Drink</button>
+                    <button class="tab-btn" data-tab="culture">Culture</button>
+                    <button class="tab-btn" data-tab="festivals">Festivals</button>
+                </div>
+                <div class="tab-content active" id="food">
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://www.mistay.in/travel-blog/content/images/2020/06/goa-cuisine.jpg" alt="Traditional Goan fish curry with coconut milk, red chilies, and aromatic spices served in clay pot">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Goan Cuisine</h3>
+                            <p>Experience the unique blend of Konkan, Portuguese, and Catholic influences in Goan food. Don't miss the seafood curries, vindaloo, and bebinca.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://media.assettype.com/gomantaktimes%2F2024-05%2F0c8bb3a4-8c32-40b2-9137-22b9dd587d32%2FIMG_6862__1_.jpg?rect=0%2C0%2C1058%2C1411" alt="Cashew feni being poured into glass with tropical fruit garnish in rustic Goan setting">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Feni & Nightlife</h3>
+                            <p>Learn about Goa's traditional cashew and coconut feni liquors and the vibrant nightlife scene from beach shacks to nightclubs.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://cdn-images-1.medium.com/max/853/1*sNS6ZUYQzWstjRksbHRTXA.jpeg" alt="Colorful street food market in Goa with vendors selling bhajis, sausages, and local snacks">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Street Food Guide</h3>
+                            <p>From pork vindaloo pav to ros omelette, explore Goa's best street food spots for authentic local flavors.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="culture">
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://privebywhiteflower.com/blog/wp-content/uploads/2024/08/Explore-Culture-of-Goa-1280x720.webp" alt="Traditional Goan folk dance performance with women in colorful dresses holding brass lamps">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Cultural Heritage</h3>
+                            <p>Discover Goa's rich cultural tapestry through its Indo-Portuguese architecture, folk dances like Dekhnni, and handicrafts.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://mediaindia.eu/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-13-at-11.42.01-AM-2-1200x900.jpeg" alt="Ancient Goa churches with white facades and Baroque architecture under blue skies">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Christian Legacy</h3>
+                            <p>Explore the Churches and Convents of Goa, a UNESCO World Heritage Site showcasing the region's Catholic heritage.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://blog.lemontreehotels.com/wp-content/uploads/2025/02/Cultural-Traditions-of-Goa.jpg" alt="Traditional Goan houses with red-tiled roofs, verandas, and colorful facades in old Portuguese style">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Local Lifestyle</h3>
+                            <p>Understand the susegad way of life - the relaxed Goan philosophy that permeates everything from work culture to social interactions.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="festivals">
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://dwq3yv87q1b43.cloudfront.net/public/blogs/fit-in/1350x300/Blog_20240212-473046224-1707726828.png" alt="Colorful Carnival parade with floats, costumes, and dancers filling the streets of Panjim">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Goa Carnival</h3>
+                            <p>Experience the vibrant four-day celebration featuring parades, music, and dances that happens before Lent every year.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://www.itsgoa.com/joy-christmas-celebrations/crib-2/" alt="Christmas lights and decorations in Goan churches and streets with nativity scenes">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Christmas Celebrations</h3>
+                            <p>Witness Goa's unique blend of Catholic and local traditions during the festive season with midnight masses and feasts.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-img">
+                            <img src="https://media.assettype.com/heraldgoa-main%2F2024-09-27%2Fxilm24ds%2F5.2.jpg?w=480&auto=format%2Ccompress&fit=max" alt="Ganesh Chaturthi festival with decorated idols and devotees celebrating on Goan beaches">
+                        </div>
+                        <div class="guide-text">
+                            <h3>Ganesh Chaturthi</h3>
+                            <p>See how madkai Goa celebrates this Hindu festival with pandals, processions, and the immersion of Ganpati idols in the sea.</p>
+                            <a href="#" class="btn">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="statistics" id="statistics">
+            <div class="container">
+                <h2 class="section-title">Tourism Statistics</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" id="touristsStat">5.3M</div>
+                        <div class="stat-label">Annual Tourists</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="hotelsStat">7,500+</div>
+                        <div class="stat-label">Hotels & Resorts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="beachesStat">100+</div>
+                        <div class="stat-label">Beaches</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="revenueStat">₹10B</div>
+                        <div class="stat-label">Annual Revenue</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Monthly Tourist Arrivals</h3>
+                    <div class="chart-placeholder">
+                        <p>Chart showing peak tourist months (Nov-Feb) with animated data visualization</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery" id="gallery">
+            <div class="container">
+                <h2 class="section-title">Goa in Pictures</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://www.bizevdeyokuz.com/wp-content/uploads/palolem-beach-.jpg" alt="Aerial view of palm-fringed Goan beach with turquoise waters and golden sand at sunrise">
+                        <div class="gallery-caption">Morning at Palolem</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://traveladventuresgoa.com/wp-content/uploads/2019/08/boat-cruise-on-mandovi-3.jpg" alt="Sunset cruise on the Mandovi River with traditional Goan boats and orange sky reflection">
+                        <div class="gallery-caption">Mandovi River Sunset</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.fodors.com/wp-content/uploads/2021/02/mapusa-market.jpg" alt="Colorful spices displayed in bowls at Mapusa Friday market with vendors in background">
+                        <div class="gallery-caption">Mapusa Market Colors</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.ytimg.com/vi/__3vQzFms9Q/maxresdefault.jpg" alt="Traditional Goan fishermen hauling nets on the shoreline at dawn in their wooden boats">
+                        <div class="gallery-caption">Fishermen at Work</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.travoh.com/wp-content/uploads/2021/11/012-W-Goa-Vagator-Beach-Resort-Goa-India-Chapora-Fort-Sea-View.jpg" alt="Vagator Beach cliffs with iconic red laterite formations and coconut trees against blue sky">
+                        <div class="gallery-caption">Cliffs of Vagator</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTllcwXFFYC-QlcT-tIXnIqDdXup3hVKsMU2Q&s" alt="Portuguese-style colonial house in Fontainhas with bright yellow walls and blue window frames">
+                        <div class="gallery-caption">Heritage Architecture</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.goayogashala.com/wp-content/uploads/2024/06/REASONS-TO-PRACTICE-YIN-YOGA-IN-INDIA.jpg" alt="Yoga session on Anjuna Beach at sunrise with participants in silhouette against orange sky">
+                        <div class="gallery-caption">Beach Yoga</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.luxuryvillasingoa.co.in/wp-content/uploads/2019/02/nightlife.jpg" alt="Full moon party at Palolem Beach with fire dancers and colorful neon lights in the night">
+                        <div class="gallery-caption">Nightlife</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerary Planner Section -->
+        <section class="itinerary" id="itinerary">
+            <div class="container">
+                <h2 class="section-title">Plan Your Goa Trip</h2>
+                <form class="itinerary-form" id="tripPlannerForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrival">Arrival Date</label>
+                        <input type="date" id="arrival" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departure">Departure Date</label>
+                        <input type="date" id="departure" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Travel Style</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="budget" name="travel-style" value="budget" checked>
+                                <label for="budget">Budget</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="mid-range" name="travel-style" value="mid-range">
+                                <label for="mid-range">Mid-range</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="luxury" name="travel-style" value="luxury">
+                                <label for="luxury">Luxury</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interests">Interests (Select multiple)</label>
+                        <select id="interests" class="form-control" multiple>
+                            <option value="beach">Beaches</option>
+                            <option value="history">Historical Sites</option>
+                            <option value="nature">Nature & Wildlife</option>
+                            <option value="adventure">Adventure Sports</option>
+                            <option value="food">Food & Culture</option>
+                            <option value="nightlife">Nightlife</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="wellness">Wellness & Yoga</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="special-requests">Special Requests</label>
+                        <textarea id="special-requests" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Generate Itinerary</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2 class="section-title">Traveler Experiences</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-slide active" id="slide1">
+                        <p class="testimonial-text">Goa exceeded all my expectations! The beaches were pristine, the food incredible, and the people so warm and welcoming. We stayed in a beautiful Portuguese-style villa near Anjuna and spent our days exploring local markets and sunset cruises.</p>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZGU2NTJmOTctYjBjOC00NmM5LThhYTEtOTBjNmZiMDA1NDM4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Sarah Johnson, travel blogger from London smiling with palm trees in background">
+                            </div>
+                            <div class="author-name">Sarah Johnson</div>
+                            <div class="author-title">Travel Blogger, UK</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide" id="slide2">
+                        <p class="testimonial-text">As a solo female traveler, I felt completely safe in Goa. I met wonderful people at beach hostels, took cooking classes, and even learned to surf! The mix of Indian and Portuguese culture makes it truly unique. Can't wait to return next winter!</p>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQETKIxiGTT6heKDZi4JmNS7pHsl-7DvMvhiQ&s" alt="Marie Dubois, photographer from Paris holding camera on Goan beach">
+                            </div>
+                            <div class="author-name">Marie Dubois</div>
+                            <div class="author-title">Photographer, France</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide" id="slide3">
+                        <p class="testimonial-text">Our family vacation in Goa was perfect. We stayed at a resort with great childcare, visited spice plantations, took a dolphin watching tour, and the kids loved building sandcastles every day. The staff everywhere went out of their way to make us comfortable.</p>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetExVZDnQbG2RBXk5IWr-b1Y2U2eQlQjwWA&s" alt="Rajesh and Priya Patel family with two kids smiling at Candolim Beach">
+                            </div>
+                            <div class="author-name">Rajesh & Priya Patel</div>
+                            <div class="author-title">Family Travelers, Mumbai</div>
+                        </div>
+                    </div>
+                    <div class="slider-nav">
+                        <div class="slider-dot active" data-slide="slide1"></div>
+                        <div class="slider-dot" data-slide="slide2"></div>
+                        <div class="slider-dot" data-slide="slide3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About GoaExplorer</h3>
+                    <p>Your trusted guide to experiencing the best of Goa. We bring authentic travel experiences, expert recommendations, and up-to-date information to help plan your perfect Goan holiday.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#attractions">Attractions</a></li>
+                        <li><a href="#travel-guides">Travel Guides</a></li>
+                        <li><a href="#itinerary">Trip Planner</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@goaexplorer.com</li>
+                        <li>Phone: +91 9876543210</li>
+                        <li>Office: Panjim, Goa 403001</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.878V14.891H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.891H13.563V21.878C18.343 21.128 22 16.991 22 12Z"/></svg></a>
+                        <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9C5 13.17 9.42 18.92 11.24 21.11C11.64 21.59 12.37 21.59 12.77 21.11C14.58 18.92 19 13.17 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/></svg></a>
+                        <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 17.7385 21.3889 19.2135 20.3012 20.3012C19.2135 21.3889 17.7385 22 16.2 22H7.8C6.2615 22 4.7865 21.3889 3.6988 20.3012C2.6111 19.2135 2 17.7385 2 16.2V7.8C2 6.2615 2.6111 4.7865 3.6988 3.6988C4.7865 2.6111 6.2615 2 7.8 2ZM7.6 4C6.72 4 6 4.72 6 5.6V18.4C6 19.28 6.72 20 7.6 20H16.4C17.28 20 18 19.28 18 18.4V5.6C18 4.72 17.28 4 16.4 4H7.6ZM12 7C12.7956 7 13.5587 7.31607 14.1213 7.87868C14.6839 8.44129 15 9.20435 15 10C15 10.7956 14.6839 11.5587 14.1213 12.1213C13.5587 12.6839 12.7956 13 12 13C11.2044 13 10.4413 12.6839 9.87868 12.1213C9.31607 11.5587 9 10.7956 9 10C9 9.20435 9.31607 8.44129 9.87868 7.87868C10.4413 7.31607 11.2044 7 12 7ZM17 6C17 6.552 17.448 7 18 7C18.552 7 19 6.552 19 6C19 5.448 18.552 5 18 5C17.448 5 17 5.448 17 6Z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GoaExplorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Sticky Navigation
+        const header = document.querySelector('header');
+        const nav = document.getElementById('navbar');
+        const headerHeight = header.offsetHeight;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > headerHeight) {
+                nav.style.display = 'block';
+            } else {
+                nav.style.display = 'none';
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Tab Navigation for Travel Guides
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Testimonial Slider
+        const dots = document.querySelectorAll('.slider-dot');
+        const slides = document.querySelectorAll('.testimonial-slide');
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                // Remove active class from all dots and slides
+                dots.forEach(d => d.classList.remove('active'));
+                slides.forEach(slide => slide.classList.remove('active'));
+                
+                // Add active class to clicked dot and corresponding slide
+                dot.classList.add('active');
+                const slideId = dot.getAttribute('data-slide');
+                document.getElementById(slideId).classList.add('active');
+            });
+        });
+
+        // Auto-advance testimonials
+        let currentSlide = 0;
+        function advanceTestimonial() {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        setInterval(advanceTestimonial, 5000);
+
+        // Animated Statistics
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                let value = Math.floor(progress * (end - start) + start);
+                if (id === 'revenueStat') {
+                    // Special formatting for revenue stat
+                    const formatter = new Intl.NumberFormat('en-IN', {
+                        style: 'currency',
+                        currency: 'INR',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    obj.innerHTML = formatter.format(value).replace('₹', '₹');
+                } else if (id === 'touristsStat') {
+                    // Format with comma separator
+                    obj.innerHTML = (value / 1000000).toFixed(1) + "M";
+                } else if (id === 'hotelsStat') {
+                    obj.innerHTML = value + "+";
+                } else if (id === 'beachesStat') {
+                    obj.innerHTML = value + "+";
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Start animations when statistics section comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue('touristsStat', 0, 5300000, 2000);
+                    animateValue('hotelsStat', 0, 7500, 2000);
+                    animateValue('beachesStat', 0, 100, 1000);
+                    animateValue('revenueStat', 0, 10000000000, 2500);
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.statistics'));
+
+        // Form Submission
+        const tripPlannerForm = document.getElementById('tripPlannerForm');
+        
+        tripPlannerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const arrival = document.getElementById('arrival').value;
+            const departure = document.getElementById('departure').value;
+            const travelStyle = document.querySelector('input[name="travel-style"]:checked').value;
+            const interests = Array.from(document.getElementById('interests').selectedOptions).map(opt => opt.value);
+            const specialRequests = document.getElementById('special-requests').value;
+            
+            // Here you would typically send this data to a server
+            // For demo purposes, we'll just show an alert
+            alert(`Thank you ${name}! Your Goa trip preferences have been received. We'll email you a customized itinerary at ${email} within 24 hours.`);
+            
+            // Reset form
+            tripPlannerForm.reset();
+        });
+
+        // Gallery Image Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                const caption = item.querySelector('.gallery-caption').textContent;
+                
+                // Create lightbox
+                const lightbox = document.createElement('div');
+                lightbox.style.position = 'fixed';
+                lightbox.style.top = '0';
+                lightbox.style.left = '0';
+                lightbox.style.width = '100%';
+                lightbox.style.height = '100%';
+                lightbox.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                lightbox.style.display = 'flex';
+                lightbox.style.flexDirection = 'column';
+                lightbox.style.justifyContent = 'center';
+                lightbox.style.alignItems = 'center';
+                lightbox.style.zIndex = '1000';
+                lightbox.style.padding = '20px';
+                
+                // Add image
+                const lightboxImg = document.createElement('img');
+                lightboxImg.src = imgSrc;
+                lightboxImg.style.maxWidth = '90%';
+                lightboxImg.style.maxHeight = '80vh';
+                lightboxImg.style.objectFit = 'contain';
+                
+                // Add caption
+                const lightboxCaption = document.createElement('p');
+                lightboxCaption.textContent = caption;
+                lightboxCaption.style.color = 'white';
+                lightboxCaption.style.marginTop = '20px';
+                lightboxCaption.style.fontSize = '1.2rem';
+                
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = '✕';
+                closeBtn.style.position = 'absolute';
+                closeBtn.style.top = '20px';
+                closeBtn.style.right = '20px';
+                closeBtn.style.fontSize = '2rem';
+                closeBtn.style.color = 'white';
+                closeBtn.style.background = 'none';
+                closeBtn.style.border = 'none';
+                closeBtn.style.cursor = 'pointer';
+                
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(lightbox);
+                });
+                
+                lightbox.appendChild(closeBtn);
+                lightbox.appendChild(lightboxImg);
+                lightbox.appendChild(lightboxCaption);
+                document.body.appendChild(lightbox);
+                
+                // Close on background click
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        document.body.removeChild(lightbox);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
